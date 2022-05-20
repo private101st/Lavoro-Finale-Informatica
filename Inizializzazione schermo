@@ -3,25 +3,69 @@ import pygame
 pygame.init()
 black = (0, 0, 0)
 white = (255, 255, 255)
-screen = pygame.display.set_mode((683, 384))
+color = (255, 0, 0)
+ampdiaframma = 42
+lunghfocale = 42
+dimsensore = 42
+screen = pygame.display.set_mode((700, 384))
 pygame.display.set_caption("Show Text")
 font = pygame.font.Font("freesansbold.ttf", 32)
+changefont = pygame.font.Font("freesansbold.ttf", 16)
 text = font.render("Start", True, white)
+ampdiaframmatext = font.render("Ampiezza Diaframma: " + str(ampdiaframma),True, white)
+lunghfocaletext = font.render("Lunghezza Focale: " + str(lunghfocale),True, white)
+dimsensoretext = font.render("Dimensione del Sensore: " + str(dimsensore),True, white)
+dimsensoretextRect = dimsensoretext.get_rect()
+dimsensoretextRect.center = (341, 200)
+lunghfocaletextRect = lunghfocaletext.get_rect()
+lunghfocaletextRect.center = (341, 120)
+ampdiaframmatextRect = ampdiaframmatext.get_rect()
+ampdiaframmatextRect.center = (341, 40)
 textRect = text.get_rect()
 textRect.center = (341, 192)
+mouse_pos = pygame.mouse.get_pos()
+startpressed = False
+
+def controlloclick():
+    global text
+    global mouse_pos
+    global startpressed
+    get_text()
+    if pygame.mouse.get_pressed()[0] and textRect.collidepoint(mouse_pos):
+        startpressed = True
+        screen.fill(black)
 
 
 def update():
-    pygame.display.update()
+
+    pygame.display.flip()
+    controlloclick()
     get_text()
 
 
 def get_text():
-    screen.blit(text, textRect)
+    global startpressed
+    global color
+    if startpressed == False:
+        screen.blit(text, textRect)
+    else:
+        screen.blit(ampdiaframmatext, ampdiaframmatextRect)
+        pygame.draw.rect(screen, color, pygame.Rect(600, 10, 60, 60))
+        changetext = changefont.render("Change", True, white)
+        changetextRect = changetext.get_rect()
+        changetextRect.center = (630, 40)
+        screen.blit(changetext, changetextRect)
+        screen.blit(lunghfocaletext, lunghfocaletextRect)
+        pygame.draw.rect(screen, color, pygame.Rect(600, 90, 60, 60))
+        screen.blit(dimsensoretext, dimsensoretextRect)
+        pygame.draw.rect(screen, color, pygame.Rect(600, 170, 60, 60))
+        
 
 
 while True:
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
+        mouse_pos = pygame.mouse.get_pos()
         update()
