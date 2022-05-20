@@ -1,0 +1,27 @@
+import pygame
+
+pygame.init()
+black = (0, 0, 0)
+white = (255, 255, 255)
+screen = pygame.display.set_mode((683, 384))
+pygame.display.set_caption("Show Text")
+font = pygame.font.Font("freesansbold.ttf", 32)
+text = font.render("Start", True, white)
+textRect = text.get_rect()
+textRect.center = (341, 192)
+
+
+def update():
+    pygame.display.update()
+    get_text()
+
+
+def get_text():
+    screen.blit(text, textRect)
+
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        update()
