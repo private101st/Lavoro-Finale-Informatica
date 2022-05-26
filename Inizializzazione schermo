@@ -31,18 +31,24 @@ returnpressed = False
 startpressed = False
 changeampdiaframma = False
 newampdiaframma = ""
+newlunghfocale = ""
 changelunghfocale = False
+changedimsensore = False
+newdimsensore = ""
 
 def controlloclick():
     global text
     global mouse_pos
     global startpressed
     global ampdiaframma
+    global dimsensore
     global changeampdiaframma
     global changelunghfocale
+    global changedimsensore
     global ampdiaframmaRect
     global ampdiaframmaansRect
     global lunghfocaleRect
+    global dimsensoreRect
     get_text()
     if pygame.mouse.get_pressed()[0] and textRect.collidepoint(mouse_pos):
         startpressed = True
@@ -51,6 +57,8 @@ def controlloclick():
         changeampdiaframma = True
     elif pygame.mouse.get_pressed()[0] and lunghfocaleRect.collidepoint(mouse_pos):
         changelunghfocale = True
+    elif pygame.mouse.get_pressed()[0] and dimsensoreRect.collidepoint(mouse_pos):
+        changedimsensore = True
 
 
 def update():
@@ -62,23 +70,31 @@ def update():
 
 def get_text():
     global ampdiaframma
+    global lunghfocale
+    global dimsensore
     global startpressed
     global color
     global changeampdiaframma
     global changelunghfocale
+    global changedimsensore
     global ampdiaframmaRect
     global ampdiaframmaansRect
     global newampdiaframma
     global lunghfocaleRect
+    global lunghfocaleansRect
+    global newlunghfocale
+    global dimsensoreRect
+    global dimsensoreansRect
+    global newdimsensore
     global inpututente
     global backspacepressed
     global returnpressed
     ampdiaframmatext = font.render("Ampiezza Diaframma: " + str(ampdiaframma),True, white)
     lunghfocaletext = font.render("Lunghezza Focale: " + str(lunghfocale),True, white)
     dimsensoretext = font.render("Dimensione del Sensore: " + str(dimsensore),True, white)
-    if startpressed == False and changelunghfocale == False and changeampdiaframma == False:
+    if startpressed == False and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False:
         screen.blit(text, textRect)
-    elif startpressed == True and changelunghfocale == False and changeampdiaframma == False:
+    elif startpressed == True and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False:
         screen.blit(ampdiaframmatext, ampdiaframmatextRect)
         ampdiaframmaRect = pygame.draw.rect(screen, color, pygame.Rect(600, 10, 60, 60))
         changetext = changefont.render("Change", True, white)
@@ -88,7 +104,7 @@ def get_text():
         screen.blit(lunghfocaletext, lunghfocaletextRect)
         lunghfocaleRect = pygame.draw.rect(screen, color, pygame.Rect(600, 90, 60, 60))
         screen.blit(dimsensoretext, dimsensoretextRect)
-        pygame.draw.rect(screen, color, pygame.Rect(600, 170, 60, 60))
+        dimsensoreRect = pygame.draw.rect(screen, color, pygame.Rect(600, 170, 60, 60))
     elif changeampdiaframma == True:
         screen.fill(black)
         if backspacepressed == True:
@@ -101,13 +117,42 @@ def get_text():
         ampdiaframmaansRect.center = (350, 192)
         screen.blit(ampdiaframmaans, ampdiaframmaansRect)
         if returnpressed == True:
-            ampdiaframma = int(newampdiaframma)
+            ampdiaframma = newampdiaframma
             changeampdiaframma = False
             returnpressed = False
             screen.fill(black)
     elif changelunghfocale == True:
         screen.fill(black)
-        
+        if backspacepressed == True:
+            newlunghfocale = newlunghfocale[:-1]
+            backspacepressed = False
+        newlunghfocale = newlunghfocale + inpututente
+        inpututente = ""
+        lunghfocaleans = changefont.render("Inserire nuova lungezza focale: " + str(newlunghfocale) + "mm",True, white)
+        lunghfocaleansRect = lunghfocaleans.get_rect()
+        lunghfocaleansRect.center = (350, 192)
+        screen.blit(lunghfocaleans, lunghfocaleansRect)
+        if returnpressed == True:
+            lunghfocale = newlunghfocale
+            changelunghfocale = False
+            returnpressed = False
+            screen.fill(black)
+    elif changedimsensore == True:
+        screen.fill(black)
+        if backspacepressed == True:
+            newdimsensore = newdimsensore[:-1]
+            backspacepressed = False
+        newdimsensore = newdimsensore + inpututente
+        inpututente = ""
+        dimsensoreans = changefont.render("Inserire nuova dimensione del sensore: " + str(newdimsensore) + "mm",True, white)
+        dimsensoreansRect = dimsensoreans.get_rect()
+        dimsensoreansRect.center = (350, 192)
+        screen.blit(dimsensoreans, dimsensoreansRect)
+        if returnpressed == True:
+            dimsensore = newdimsensore
+            changedimsensore = False
+            returnpressed = False
+            screen.fill(black)
 
 
 while True:
