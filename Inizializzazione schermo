@@ -26,6 +26,8 @@ textRect = text.get_rect()
 textRect.center = (341, 192)
 mouse_pos = pygame.mouse.get_pos()
 inpututente = ""
+backspacepressed = False
+returnpressed = False
 startpressed = False
 changeampdiaframma = False
 newampdiaframma = ""
@@ -35,6 +37,7 @@ def controlloclick():
     global text
     global mouse_pos
     global startpressed
+    global ampdiaframma
     global changeampdiaframma
     global changelunghfocale
     global ampdiaframmaRect
@@ -58,6 +61,7 @@ def update():
 
 
 def get_text():
+    global ampdiaframma
     global startpressed
     global color
     global changeampdiaframma
@@ -67,7 +71,11 @@ def get_text():
     global newampdiaframma
     global lunghfocaleRect
     global inpututente
-    
+    global backspacepressed
+    global returnpressed
+    ampdiaframmatext = font.render("Ampiezza Diaframma: " + str(ampdiaframma),True, white)
+    lunghfocaletext = font.render("Lunghezza Focale: " + str(lunghfocale),True, white)
+    dimsensoretext = font.render("Dimensione del Sensore: " + str(dimsensore),True, white)
     if startpressed == False and changelunghfocale == False and changeampdiaframma == False:
         screen.blit(text, textRect)
     elif startpressed == True and changelunghfocale == False and changeampdiaframma == False:
@@ -83,12 +91,20 @@ def get_text():
         pygame.draw.rect(screen, color, pygame.Rect(600, 170, 60, 60))
     elif changeampdiaframma == True:
         screen.fill(black)
+        if backspacepressed == True:
+            newampdiaframma = newampdiaframma[:-1]
+            backspacepressed = False
         newampdiaframma = newampdiaframma + inpututente
         inpututente = ""
         ampdiaframmaans = changefont.render("Inserire nuova ampiezza del diaframma: " + str(newampdiaframma) + "mm",True, white)
         ampdiaframmaansRect = ampdiaframmaans.get_rect()
         ampdiaframmaansRect.center = (350, 192)
         screen.blit(ampdiaframmaans, ampdiaframmaansRect)
+        if returnpressed == True:
+            ampdiaframma = int(newampdiaframma)
+            changeampdiaframma = False
+            returnpressed = False
+            screen.fill(black)
     elif changelunghfocale == True:
         screen.fill(black)
         
@@ -120,5 +136,9 @@ while True:
                 inpututente = "8"
             elif event.key == pygame.K_9:
                 inpututente = "9"
+            elif event.key == pygame.K_BACKSPACE:
+                backspacepressed = True
+            elif event.key == pygame.K_RETURN:
+                returnpressed = True
         mouse_pos = pygame.mouse.get_pos()
         update()
