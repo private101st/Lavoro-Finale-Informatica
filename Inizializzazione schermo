@@ -1,4 +1,5 @@
 import pygame
+import time
 
 pygame.init()
 black = (0, 0, 0)
@@ -24,16 +25,29 @@ ampdiaframmatextRect.center = (341, 40)
 textRect = text.get_rect()
 textRect.center = (341, 192)
 mouse_pos = pygame.mouse.get_pos()
+inpututente = ""
 startpressed = False
+changeampdiaframma = False
+newampdiaframma = ""
+changelunghfocale = False
 
 def controlloclick():
     global text
     global mouse_pos
     global startpressed
+    global changeampdiaframma
+    global changelunghfocale
+    global ampdiaframmaRect
+    global ampdiaframmaansRect
+    global lunghfocaleRect
     get_text()
     if pygame.mouse.get_pressed()[0] and textRect.collidepoint(mouse_pos):
         startpressed = True
         screen.fill(black)
+    elif pygame.mouse.get_pressed()[0] and ampdiaframmaRect.collidepoint(mouse_pos):
+        changeampdiaframma = True
+    elif pygame.mouse.get_pressed()[0] and lunghfocaleRect.collidepoint(mouse_pos):
+        changelunghfocale = True
 
 
 def update():
@@ -46,19 +60,37 @@ def update():
 def get_text():
     global startpressed
     global color
-    if startpressed == False:
+    global changeampdiaframma
+    global changelunghfocale
+    global ampdiaframmaRect
+    global ampdiaframmaansRect
+    global newampdiaframma
+    global lunghfocaleRect
+    global inpututente
+    
+    if startpressed == False and changelunghfocale == False and changeampdiaframma == False:
         screen.blit(text, textRect)
-    else:
+    elif startpressed == True and changelunghfocale == False and changeampdiaframma == False:
         screen.blit(ampdiaframmatext, ampdiaframmatextRect)
-        pygame.draw.rect(screen, color, pygame.Rect(600, 10, 60, 60))
+        ampdiaframmaRect = pygame.draw.rect(screen, color, pygame.Rect(600, 10, 60, 60))
         changetext = changefont.render("Change", True, white)
         changetextRect = changetext.get_rect()
         changetextRect.center = (630, 40)
         screen.blit(changetext, changetextRect)
         screen.blit(lunghfocaletext, lunghfocaletextRect)
-        pygame.draw.rect(screen, color, pygame.Rect(600, 90, 60, 60))
+        lunghfocaleRect = pygame.draw.rect(screen, color, pygame.Rect(600, 90, 60, 60))
         screen.blit(dimsensoretext, dimsensoretextRect)
         pygame.draw.rect(screen, color, pygame.Rect(600, 170, 60, 60))
+    elif changeampdiaframma == True:
+        screen.fill(black)
+        newampdiaframma = newampdiaframma + inpututente
+        inpututente = ""
+        ampdiaframmaans = changefont.render("Inserire nuova ampiezza del diaframma: " + str(newampdiaframma) + "mm",True, white)
+        ampdiaframmaansRect = ampdiaframmaans.get_rect()
+        ampdiaframmaansRect.center = (350, 192)
+        screen.blit(ampdiaframmaans, ampdiaframmaansRect)
+    elif changelunghfocale == True:
+        screen.fill(black)
         
 
 
@@ -67,5 +99,26 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_0:
+                inpututente = "0"
+            elif event.key == pygame.K_1:
+                inpututente = "1"
+            elif event.key == pygame.K_2:
+                inpututente = "2"
+            elif event.key == pygame.K_3:
+                inpututente = "3"
+            elif event.key == pygame.K_4:
+                inpututente = "4"
+            elif event.key == pygame.K_5:
+                inpututente = "5"
+            elif event.key == pygame.K_6:
+                inpututente = "6"
+            elif event.key == pygame.K_7:
+                inpututente = "7"
+            elif event.key == pygame.K_8:
+                inpututente = "8"
+            elif event.key == pygame.K_9:
+                inpututente = "9"
         mouse_pos = pygame.mouse.get_pos()
         update()
