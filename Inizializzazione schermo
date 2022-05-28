@@ -1,21 +1,26 @@
 import pygame
 import time
+import math
 
 pygame.init()
 black = (0, 0, 0)
 white = (255, 255, 255)
 color = (255, 0, 0)
-ampdiaframma = 42
-lunghfocale = 42
-dimsensore = 42
+ampdiaframma = 1
+lunghfocale = 1
+dimsensore = 1
+distmin = 0
 screen = pygame.display.set_mode((700, 384))
 pygame.display.set_caption("Show Text")
-font = pygame.font.Font("freesansbold.ttf", 32)
+font = pygame.font.Font("freesansbold.ttf", 20)
 changefont = pygame.font.Font("freesansbold.ttf", 16)
 text = font.render("Start", True, white)
-ampdiaframmatext = font.render("Ampiezza Diaframma: " + str(ampdiaframma),True, white)
-lunghfocaletext = font.render("Lunghezza Focale: " + str(lunghfocale),True, white)
-dimsensoretext = font.render("Dimensione del Sensore: " + str(dimsensore),True, white)
+ampdiaframmatext = changefont.render("Ampiezza Diaframma: " + str(ampdiaframma),True, white)
+lunghfocaletext = changefont.render("Lunghezza Focale: " + str(lunghfocale) + "mm",True, white)
+dimsensoretext = changefont.render("Misura del Circolo di Confusione: " + str(dimsensore) + "mm",True, white)
+distmintext = font.render("La distanza minima di messa a fuoco è: " + str(distmin) + "m",True, white)
+distmintextRect = distmintext.get_rect()
+distmintextRect.center = (341, 280)
 dimsensoretextRect = dimsensoretext.get_rect()
 dimsensoretextRect.center = (341, 200)
 lunghfocaletextRect = lunghfocaletext.get_rect()
@@ -36,6 +41,12 @@ changelunghfocale = False
 changedimsensore = False
 newdimsensore = ""
 
+def calcolo():                                                                          #by Michele Cristofaletti, Vittorio Menon and Gabriele Zampini
+    global ampdiaframma
+    global dimsensore
+    global lunghfocale
+    global distmin
+    distmin = round(((lunghfocale**2)/(ampdiaframma*dimsensore)), 3)
 def controlloclick():
     global text
     global mouse_pos
@@ -65,6 +76,7 @@ def update():
 
     pygame.display.flip()
     controlloclick()
+    calcolo()
     get_text()
 
 
@@ -89,22 +101,32 @@ def get_text():
     global inpututente
     global backspacepressed
     global returnpressed
-    ampdiaframmatext = font.render("Ampiezza Diaframma: " + str(ampdiaframma),True, white)
-    lunghfocaletext = font.render("Lunghezza Focale: " + str(lunghfocale),True, white)
-    dimsensoretext = font.render("Dimensione del Sensore: " + str(dimsensore),True, white)
+    ampdiaframmatext = changefont.render("Ampiezza Diaframma: " + str(ampdiaframma) , True, white)
+    lunghfocaletext = changefont.render("Lunghezza Focale: " + str(lunghfocale) + "mm",True, white)
+    dimsensoretext = changefont.render("Misura del Circolo di Confusione: " + str(dimsensore) + "mm",True, white)
+    distmintext = font.render("La distanza minima di messa a fuoco è: " + str(distmin) + "m",True, white)
     if startpressed == False and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False:
         screen.blit(text, textRect)
     elif startpressed == True and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False:
         screen.blit(ampdiaframmatext, ampdiaframmatextRect)
-        ampdiaframmaRect = pygame.draw.rect(screen, color, pygame.Rect(600, 10, 60, 60))
-        changetext = changefont.render("Change", True, white)
+        ampdiaframmaRect = pygame.draw.rect(screen, black, pygame.Rect(600, 10, 60, 60))
+        changetext = changefont.render("Cambia", True, white)
         changetextRect = changetext.get_rect()
         changetextRect.center = (630, 40)
         screen.blit(changetext, changetextRect)
         screen.blit(lunghfocaletext, lunghfocaletextRect)
-        lunghfocaleRect = pygame.draw.rect(screen, color, pygame.Rect(600, 90, 60, 60))
+        lunghfocaleRect = pygame.draw.rect(screen, black, pygame.Rect(600, 90, 60, 60))
+        changetext2 = changefont.render("Cambia", True, white)
+        changetext2Rect = changetext2.get_rect()
+        changetext2Rect.center = (630, 120)
+        screen.blit(changetext2, changetext2Rect)
         screen.blit(dimsensoretext, dimsensoretextRect)
-        dimsensoreRect = pygame.draw.rect(screen, color, pygame.Rect(600, 170, 60, 60))
+        dimsensoreRect = pygame.draw.rect(screen, black, pygame.Rect(600, 170, 60, 60))
+        changetext3 = changefont.render("Cambia", True, white)
+        changetext3Rect = changetext3.get_rect()
+        changetext3Rect.center = (630, 200)
+        screen.blit(changetext3, changetext3Rect)
+        screen.blit(distmintext, distmintextRect)
     elif changeampdiaframma == True:
         screen.fill(black)
         if backspacepressed == True:
@@ -112,12 +134,12 @@ def get_text():
             backspacepressed = False
         newampdiaframma = newampdiaframma + inpututente
         inpututente = ""
-        ampdiaframmaans = changefont.render("Inserire nuova ampiezza del diaframma: " + str(newampdiaframma) + "mm",True, white)
+        ampdiaframmaans = changefont.render("Inserire nuova ampiezza del diaframma: " + str(newampdiaframma),True, white)
         ampdiaframmaansRect = ampdiaframmaans.get_rect()
         ampdiaframmaansRect.center = (350, 192)
         screen.blit(ampdiaframmaans, ampdiaframmaansRect)
         if returnpressed == True:
-            ampdiaframma = newampdiaframma
+            ampdiaframma = int(newampdiaframma)
             changeampdiaframma = False
             returnpressed = False
             screen.fill(black)
@@ -133,7 +155,7 @@ def get_text():
         lunghfocaleansRect.center = (350, 192)
         screen.blit(lunghfocaleans, lunghfocaleansRect)
         if returnpressed == True:
-            lunghfocale = newlunghfocale
+            lunghfocale = int(newlunghfocale)
             changelunghfocale = False
             returnpressed = False
             screen.fill(black)
@@ -149,7 +171,7 @@ def get_text():
         dimsensoreansRect.center = (350, 192)
         screen.blit(dimsensoreans, dimsensoreansRect)
         if returnpressed == True:
-            dimsensore = newdimsensore
+            dimsensore = int(newdimsensore)
             changedimsensore = False
             returnpressed = False
             screen.fill(black)
