@@ -15,10 +15,10 @@ pygame.display.set_caption("Show Text")
 font = pygame.font.Font("freesansbold.ttf", 20)
 changefont = pygame.font.Font("freesansbold.ttf", 16)
 text = font.render("Start", True, white)
-ampdiaframmatext = changefont.render("Ampiezza Diaframma: " + str(ampdiaframma),True, white)
+ampdiaframmatext = changefont.render("Ampiezza Diaframma: f/" + str(ampdiaframma),True, white)
 lunghfocaletext = changefont.render("Lunghezza Focale: " + str(lunghfocale) + "mm",True, white)
 dimsensoretext = changefont.render("Misura del Circolo di Confusione: " + str(dimsensore) + "mm",True, white)
-distmintext = font.render("La distanza minima di messa a fuoco è: " + str(distmin) + "m",True, white)
+distmintext = font.render("La distanza minima di messa a fuoco è: " + str(distmin) + "mm/" + str(distmin/10)+ "m",True, white)
 distmintextRect = distmintext.get_rect()
 distmintextRect.center = (341, 280)
 dimsensoretextRect = dimsensoretext.get_rect()
@@ -41,7 +41,7 @@ changelunghfocale = False
 changedimsensore = False
 newdimsensore = ""
 
-def calcolo():                                                                          #by Michele Cristofaletti, Vittorio Menon and Gabriele Zampini
+def calcolo():                                                                          
     global ampdiaframma
     global dimsensore
     global lunghfocale
@@ -101,10 +101,10 @@ def get_text():
     global inpututente
     global backspacepressed
     global returnpressed
-    ampdiaframmatext = changefont.render("Ampiezza Diaframma: " + str(ampdiaframma) , True, white)
+    ampdiaframmatext = changefont.render("Ampiezza Diaframma: f/" + str(ampdiaframma) , True, white)
     lunghfocaletext = changefont.render("Lunghezza Focale: " + str(lunghfocale) + "mm",True, white)
     dimsensoretext = changefont.render("Misura del Circolo di Confusione: " + str(dimsensore) + "mm",True, white)
-    distmintext = font.render("La distanza minima di messa a fuoco è: " + str(distmin) + "m",True, white)
+    distmintext = font.render("La distanza minima di messa a fuoco è: " + str(distmin) + "mm/" + str(round((distmin/1000),3)) + "m" ,True, white)
     if startpressed == False and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False:
         screen.blit(text, textRect)
     elif startpressed == True and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False:
@@ -139,7 +139,10 @@ def get_text():
         ampdiaframmaansRect.center = (350, 192)
         screen.blit(ampdiaframmaans, ampdiaframmaansRect)
         if returnpressed == True:
-            ampdiaframma = int(newampdiaframma)
+            if newampdiaframma == "":
+                ampdiaframma = 1
+            else:
+                ampdiaframma = float(newampdiaframma)
             changeampdiaframma = False
             returnpressed = False
             screen.fill(black)
@@ -155,7 +158,10 @@ def get_text():
         lunghfocaleansRect.center = (350, 192)
         screen.blit(lunghfocaleans, lunghfocaleansRect)
         if returnpressed == True:
-            lunghfocale = int(newlunghfocale)
+            if newlunghfocale == "":
+                lunghfocale = 0
+            else:
+                lunghfocale = float(newlunghfocale)
             changelunghfocale = False
             returnpressed = False
             screen.fill(black)
@@ -171,7 +177,10 @@ def get_text():
         dimsensoreansRect.center = (350, 192)
         screen.blit(dimsensoreans, dimsensoreansRect)
         if returnpressed == True:
-            dimsensore = int(newdimsensore)
+            if newdimsensore == "":
+                dimsensore = 1
+            else:
+                dimsensore = float(newdimsensore)
             changedimsensore = False
             returnpressed = False
             screen.fill(black)
@@ -203,6 +212,8 @@ while True:
                 inpututente = "8"
             elif event.key == pygame.K_9:
                 inpututente = "9"
+            elif event.key == pygame.K_PERIOD:
+                inpututente = "."
             elif event.key == pygame.K_BACKSPACE:
                 backspacepressed = True
             elif event.key == pygame.K_RETURN:
