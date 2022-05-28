@@ -1,13 +1,13 @@
 import math
 
 
-def distanza_iperfocale(f,N,c):
+def distanza_iperfocale(f,N,c): # Funzione che permette il calcolo della distanza iperfocale.
   H=((f**2)/(N*c))
 
   return H
 
 
-def lunghezza_focale(H,N,c):
+def lunghezza_focale(H,N,c): # Funzione che permette il calcolo della lunghezza della focale.
   if N>0 and H>0 and c>0:
     f=math.sqrt(N*H*c)
     return f
@@ -19,13 +19,13 @@ def lunghezza_focale(H,N,c):
   return
 
 
-def apertura_diaframma(H,f,c):
+def apertura_diaframma(H,f,c): # Funzione che permette il calcolo dell'apertura del diafframma.
   N= (f*f)/(H*c)
 
   return N
 
 
-def circolo_confusione (H,f,N):
+def circolo_confusione (H,f,N):  # Funzione che permette il calcolo del circolo di confusione.
   c = (f*f)/(H*N);
 
   return c
@@ -70,112 +70,112 @@ def uscita():
 
 start=str(input(' Premi y se vuoi entrare nel programma;\n Premi n se vuoi leggere la relazione;\n Premi t se vuoi vedere l\' algoritmo senza interfaccia;\n Premi i se vuoi vedere il codice dell\'interfaccia\n'));
 if start== 'y':
-  start1= input('Quale valore vuoi calcolare tra i seguenti: \n Premi 1 per la distanza iperfocale (distanza minima di messa a fuoco) \n Premi 2 per la lunghezza focale \n Premi 3 per l\'apertura del diaframma \n Premi 4 per la misura del circolo di confusione\n ')
-  if start1== '1':
-   f = (input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione\n'))
+  start1= input('Quale valore vuoi calcolare tra i seguenti: \n Premi 1 per la distanza iperfocale (distanza minima di messa a fuoco) \n Premi 2 per la lunghezza focale \n Premi 3 per l\'apertura del diaframma \n Premi 4 per la misura del circolo di confusione\n ')# Facendo ciò faciamo sciegliere all'utente che cosa vuole colare. 
+  if start1== '1':  # L'utente scieglie di calcolare la distanza iperfocale.
+   f = (input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione\n'))  # L'utenete inserisce la lunghezza della focale.
    if f=='d':
-     print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. ');
+     print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. '); # L'utente sceglie di vedere la definizione di lunghezza focale.
      exit
    elif type(f)!=float or type(f)!=int:
      uscita()
    elif f=='n':
      exit
    else:
-     N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione\n'))
+     N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione\n')) # Inserisce l'apertura del diaframma.
      if type(N)!=float or type(N)!=int:
        uscita()
      elif N=='d':
-       print ('L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore.')
+       print ('L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore.')  # L'utente se scrive d scieglie di vedere la definizione dell'apertura del diaframma.
      else:
-       c = float(input('Inserisci il circolo di confusione, n per terminare. Premi d per vedere la definizione\n'))
+       c = float(input('Inserisci il circolo di confusione, n per terminare. Premi d per vedere la definizione\n')) #L'utente inserisce il circolo di confusione.
        if type(c)!= float or type(c)!= int:
          uscita()
        elif c=='d':
-         print ('Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi')
+         print ('Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi') # L'utenete sceglie di vedere la definizione di circolo di confusione.
        else:
-         print ('La distanza iperfocale è: ' , distanza_iperfocale(f,N,c))
+         print ('La distanza iperfocale è: ' , distanza_iperfocale(f,N,c)) # Calcolo della distanza iperfocale
          exit
-  elif start1== '2':
-    H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione\n'));
+  elif start1== '2': # Se l'utente scieglie di vedere la lunghezza focale
+    H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione\n')); # Inserisce la distanza iperfocale
     if H == 'n':
       exit
     elif H == 'd':
-      print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito\n')
+      print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito\n') # L'utente sceglie di vedere la definizione di distanza iperfocale.
       exit
     else:
-      N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione\n'))
+      N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione\n')) # L'utente inserisce l'apertura del diaframma.
       if N== 'n':
        exit
       elif type(N)!=float or type(N)!=int:
         uscita()
       elif N=='d':
-       print ('L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore.')
+       print ('L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore.')# Sceglie di vedere la definizione dell'apertura del diaframma.
       else:
-       c = float(input('Inserisci il circolo di confusione, n per terminare. Premi d per vedere la definizione\n'))
+       c = float(input('Inserisci il circolo di confusione, n per terminare. Premi d per vedere la definizione\n')) # L'utente inserisce il valore del circolo di confusione.
        if c=='n':
          exit
        elif c=='d':
-         print ('Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi')
+         print ('Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi') # L'utente sceglie di vedere il circolo di confusione.
        elif type(c)!=float or type(c)!=int:
          uscita()
        else:
-         print ('La lunghezza focale è: ' , lunghezza_focale(H,N,c))
-  elif start1 == '3':
-    f = float(input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione\n'))
+         print ('La lunghezza focale è: ' , lunghezza_focale(H,N,c)) # L'algoritmo calcola la lunghezza della focale.
+  elif start1 == '3': # Scieglie di calcolare l'apertura del diaframma.
+    f = float(input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione\n'))# Inserisce la lunghezza della focale.
     if f=='d':
-       print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. ');
+       print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. '); # Sceglie di vedere la definizione di lunghezza focale.
        exit
     elif f=='n':
        exit
     elif type(f)!=float or type(f)!=int:
       uscita()
     else:
-      H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione\n'));
+      H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione\n')); # L'utente inserisce la distanza iperfocale.
       if H == 'n':
        exit
       elif H == 'd':
-       print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito\n')
+       print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito\n') # L'utente sceglie di visualizzare la difinizione di distanza iperfocale.
        exit
       elif type(H)!=float or type(H)!=int:
         uscita()
       else:
-       c = float(input('Inserisci il circolo di confusione, n per terminare. Premi d per vedere la definizione\n'))
+       c = float(input('Inserisci il circolo di confusione, n per terminare. Premi d per vedere la definizione\n')) # Inserisce il valore del circolo di confusione
        if c=='n':
          exit
        elif c=='d':
-         print ('Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi')
+         print ('Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi')# Definizione del circolo di confusione.
        elif type(c)!=float or type(c)!=int:
          uscita()
        else:
-         print ('L\'apertura del diaframma è: ' , apertura_diaframma(H,f,c) )
-  elif start == '4':
-    f = float(input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione\n'))
+         print ('L\'apertura del diaframma è: ' , apertura_diaframma(H,f,c) ) # Calcolo dell'apertura del diaframma.
+  elif start == '4': # L'utente sceglie di calcolare la misura del circolo di confusione
+    f = float(input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione\n')) # Inserisce la lunghezza della focale.
     if f=='d':
-     print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. ');
+     print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. '); # L'utente sceglie di vedere la definizione di lunghezza della focale.
      exit
     elif f=='n':
      exit
     elif type(f)!=float or type(f)!=int:
       uscita()
     else:
-     N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione\n'))
+     N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione\n')) # Inserisce l'apertuta del diaframma.
      if N== 'n':
        exit
      elif N=='d':
-       print ('L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore.')
+       print ('L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore.') # Sceglie di vedere l'ampiezza del diaframma.
      elif type(N)!=float or type(N)!=int:
        uscita()
      else:
-        H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione\n'));
+        H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione\n')); # Inserisce la distanza iperfocale.
         if H == 'n':
          exit
         elif H == 'd':
-         print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito\n')
+         print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito\n') # Sceglie di visualizzare la definizione della distanza iperfocale.
          exit
         elif type(H)!=float or type(H)!=int:
           uscita()
         else:
-          print ('Il circolo di confusione è: ' ,  circolo_confusione(H,f,N))
+          print ('Il circolo di confusione è: ' ,  circolo_confusione(H,f,N)) # Calcolo del valore del circolo di confusione.
 elif start=='n':
   print ('Relazione')
   exit
@@ -192,7 +192,7 @@ interfaccia_=""""""
 start=str(input(' Premi y se vuoi entrare nel programma;\n Premi n se vuoi leggere la relazione;\n Premi t se vuoi vedere l\' algoritmo senza interfaccia;\n Premi i se vuoi vedere il codice dell\'interfaccia\n'));
 if start== 'y':
   start1= input('Quale valore vuoi calcolare tra i seguenti: \n Premi 1 per la distanza iperfocale (distanza minima di messa a fuoco) \n Premi 2 per la lunghezza focale \n Premi 3 per l\'apertura del diaframma \n Premi 4 per la misura del circolo di confusione\n ')
-  if start1== '1':
+  if start1== '1':# L'utente sceglie di calcolare la distanza iperfocale.
    f = (input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione\n'))
    if f=='d':
      print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. ');
@@ -216,7 +216,7 @@ if start== 'y':
        else:
          print ('La distanza iperfocale è: ' , distanza_iperfocale(f,N,c))
          exit
-  elif start1== '2':
+  elif start1== '2': # L'utente sceglie di calcolare la lunghezza della focale.
     H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione\n'));
     if H == 'n':
       exit
@@ -241,7 +241,7 @@ if start== 'y':
          uscita()
        else:
          print ('La lunghezza focale è: ' , lunghezza_focale(H,N,c))
-  elif start1 == '3':
+  elif start1 == '3': # L'utente sceglie di calcolare l'apertura del diaframma 
     f = float(input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione\n'))
     if f=='d':
        print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. ');
@@ -269,7 +269,7 @@ if start== 'y':
          uscita()
        else:
          print ('L\'apertura del diaframma è: ' , apertura_diaframma(H,f,c) )
-  elif start == '4':
+  elif start == '4': # L'utente sceglie di calcolare il circolo di confusione.
     f = float(input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione\n'))
     if f=='d':
      print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. ');
