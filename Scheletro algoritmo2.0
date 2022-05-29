@@ -376,14 +376,13 @@ else:
 """
 #inizializzo l'interfaccia in modo da metterla poi in output
 interfaccia_="""
+#importo le librerie che mi serviranno
 import os
-from sys import path as syspath
-syspath.append(os.path.join(os.path.dirname(__file__), 'pygame'))
 import pygame
 import time
 import math
 
-
+#inizializzo le variabili e i pulsanti
 pygame.init()
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -428,13 +427,14 @@ visualizedef1 = False
 visualizedef2 = False
 visualizedef3 = False
 
-def calcolo():                                                                          
+def calcolo():                                                              #questa funzione serve per fare il calcolo per la distanza minima di messa a fuoco            
     global ampdiaframma
     global dimsensore
     global lunghfocale
     global distmin
     distmin = round(((lunghfocale**2)/(ampdiaframma*dimsensore)), 3)
-def controlloclick():
+    
+def controlloclick():                                                       #questa funzione serve per controllare se l'utente clicca su qualche pulsante (la funzione viene richiamata ogni secondo)
     global text
     global mouse_pos
     global startpressed
@@ -474,7 +474,7 @@ def controlloclick():
         visualizedef3 = True
 
 
-def update():
+def update():                                                                   #questa funzione aggiorna lo schermo e verifica se c'è stato un input da parte dell'utente
 
     pygame.display.flip()
     controlloclick()
@@ -482,7 +482,7 @@ def update():
     get_text()
 
 
-def get_text():
+def get_text():                                                                 #questa funzione verifica il testo da mostrare all'utente in funzione di che cosa ha scelto di fare
     global x
     global y
     global ampdiaframma
@@ -516,9 +516,9 @@ def get_text():
     lunghfocaletext = changefont.render("Lunghezza Focale: " + str(lunghfocale) + "mm",True, white)
     dimsensoretext = changefont.render("Misura del Circolo di Confusione: " + str(dimsensore) + "mm",True, white)
     distmintext = font.render("La distanza minima di messa a fuoco è: " + str(round((distmin/1000),3)) + "m" ,True, white)
-    if startpressed == False and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False and visualizedef1 == False and visualizedef2 == False and visualizedef3 == False:
+    if startpressed == False and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False and visualizedef1 == False and visualizedef2 == False and visualizedef3 == False:                 #questo è il pulsante di avvio
         screen.blit(text, textRect)
-    elif startpressed == True and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False and visualizedef1 == False and visualizedef2 == False and visualizedef3 == False:
+    elif startpressed == True and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False and visualizedef1 == False and visualizedef2 == False and visualizedef3 == False:                #questa è la schermata principale
         screen.blit(ampdiaframmatext, ampdiaframmatextRect)
         ampdiaframmaRect = pygame.draw.rect(screen, black, pygame.Rect(x*0.857, y*0.059, 120, 60))
         changetext = changefont.render("Cambia", True, white)
@@ -553,7 +553,7 @@ def get_text():
         screen.blit(deftext3, deftextRect3)
         screen.blit(changetext3, changetext3Rect)
         screen.blit(distmintext, distmintextRect)
-    elif changeampdiaframma == True:
+    elif changeampdiaframma == True:                                                                                        #questa è la schermata dove si può modificare l'ampiezza del diaframma
         screen.fill(black)
         if backspacepressed == True:
             newampdiaframma = newampdiaframma[:-1]
@@ -572,7 +572,7 @@ def get_text():
             changeampdiaframma = False
             returnpressed = False
             screen.fill(black)
-    elif changelunghfocale == True:
+    elif changelunghfocale == True:                                                                                         #questa è la schermata dove si può modificare la lunghezza focale
         screen.fill(black)
         if backspacepressed == True:
             newlunghfocale = newlunghfocale[:-1]
@@ -591,7 +591,7 @@ def get_text():
             changelunghfocale = False
             returnpressed = False
             screen.fill(black)
-    elif changedimsensore == True:
+    elif changedimsensore == True:                                                                                          #questa è la schermata dove si può modificare il circolo di confusione (originariamente era la dimensione del sensore, per cui i nomi delle variabili sono rimasti tali)
         screen.fill(black)
         if backspacepressed == True:
             newdimsensore = newdimsensore[:-1]
@@ -654,7 +654,7 @@ def get_text():
             screen.fill(black)
 
 
-while True:
+while True:                                                     #qui dico al programma di aggiornare lo schermo finche non viene fermato e di controllare se c'è stato un input da tastiera
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
