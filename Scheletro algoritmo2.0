@@ -1,4 +1,5 @@
-import math
+import math#ci serve per la radice quadrata. Avremo potuto usare l'elevamento a potenza alla 1/2 perchè è la stessa cosa della radice quadrata
+
 
 
 def distanza_iperfocale(f,N,c):
@@ -6,7 +7,7 @@ def distanza_iperfocale(f,N,c):
 
   return H
 
-
+#da questa formula iniziale possiamo calcolarci i vari membri usando la formula inversa
 def lunghezza_focale(H,N,c):
   if N>0 and H>0 and c>0:
     f=math.sqrt(N*H*c)
@@ -31,323 +32,120 @@ def circolo_confusione (H,f,N):
   return c
 
 
-def uscita():
+def uscita():#cosa succede se l'input è sbagliato
   print ('Errore nell\'input')
   exit
 
-a=999999999
-
-algoritmo_scheletro="""
-import math
+a=999999999#inizializzo a con cui andremo a confrontare dei valori in input
+#inizializzo la relazione da poi mettere in output se richiesto
 
 
-def distanza_iperfocale(f,N,c):
-  H=((f**2)/(N*c))
+relazione="""
 
-  return H
+RELAZIONE PROGETTO FINALE DI INFORMATICA
 
+Inizialmente abbiamo creato un algoritmo “traccia” dove abbiamo ragionato sul procedimento e la progettazione del programma. 
+La bozza iniziale ci ha permesso di provare vari procedimenti del programma e perfezionarli per poi arrivare a trovare un algoritmo corretto dal punto di vista semantico;
+con un utilizzo dei nomi delle variabili appropriato, con uso di commenti, con la gestione dell'input errato e un algoritmo User-friendly.  
+In questa bozza (o scheletro dell’algoritmo) siamo riusciti a creare un programma completo senza interfaccia in modo che un utente, se non interessato alla grafica, potesse usare questo algoritmo più completo. 
+Inoltre abbiamo messo pure l’opzione di visualizzare il codice dello scheletro, quello dell’interfaccia e questa stessa relazione. Nello scheletro sono presenti commenti.
+All’interno della bozza sono state utilizzate e provate per la prima volta le formule che ci hanno permesso di risolvere l’algoritmo.
+Le formule più importanti sono state trovate su:
+ 
+https://www.riccardoperini.it/iperfocale-in-fotografia/
+http://www.fotografia-digitale-nonsolo.it/contenuti/iperfocale.htm#:~:text=la%20distanza%20di%20messa%20fuoco,%3A%20D%20%3D%20punto%20pi%C3%B9%20lontano)
+per poi essere rielaborate e adattate al nostro algoritmo. 
 
-def lunghezza_focale(H,N,c):
-  if N>0 and H>0 and c>0:
-    f=math.sqrt(N*H*c)
-    return f
-  elif N==0 or H==0 or c==0:
-    f=0
-    return f
-  else:
-    print ('Errore nell\'input')
-  return
+Il programma è stato in seguito integrato con l’interfaccia, dove è stato creato un menù nel  quale si riesce facilmente ad interagire modificando i dati in input (ampiezza del diaframma,lunghezza focale e la misura del circolo di confusione), 
+modificando questi ultimi l’algoritmo restituirà in output la distanza minima di messa a fuoco. 
+Non tutte le funzioni presenti nello scheletro dell’algoritmo sono presenti nel codice dell’interfaccia perchè noi abbiamo ritenuto opportuno mettere solo il calcolo nell’interfaccia e il codice completo in un algoritmo staccato. 
+L’aiuto necessario per la programmazione dell’interfaccia è stato trovato su:
 
+https://elearn.ellak.gr/mod/page/view.php?id=2786
+https://www.geeksforgeeks.org/how-to-draw-rectangle-in-pygame/
 
-def apertura_diaframma(H,f,c):
-  N= (f*f)/(H*c)
-
-  return N
-
-
-def circolo_confusione (H,f,N):
-  c = (f*f)/(H*N);
-
-  return c
-
-
-def uscita():
-  print ('Errore nell\'input')
-  exit
-
-a=999999999
-
-algoritmo_scheletro="*Qui dentro ci srà il codice dello scheletro*"
-
-interfaccia_="*Qui dentro ci sarà il codice dell'interfaccia*"
-
-start=str(input(' Premi y se vuoi entrare nel programma;\n Premi n se vuoi leggere la relazione;\n Premi t se vuoi vedere l\' algoritmo senza interfaccia;\n Premi i se vuoi vedere il codice dell\'interfaccia\n'));
-if start== 'y':
-  start1= input('Quale valore vuoi calcolare tra i seguenti: \nPremi 1 per la distanza iperfocale (distanza minima di messa a fuoco) \nPremi 2 per la lunghezza focale \nPremi 3 per l\'apertura del diaframma \nPremi 4 per la misura del circolo di confusione\n ')
-  
-  if start1== '1':
-   
-   
-   f = (input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione e terminare\n'))
-   
-   
-   if f=='d':
-     print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. Fonte:https://it.wikipedia.org/wiki/Lunghezza_focale\n');
-     exit
-   
-   
-   elif f=='n':
-     exit
-
-
-   elif (-a<f<a):
-     
-     
-     N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione e terminare\n'))
-     
-     if N=='d':
-       print ('L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore. Fonte:https://www.totaldesign.it/diaframma-fotografia/\n')
-       exit
-
-     elif N == 'n':
-       exit
-     
-     elif -a<N<a:
-       
-       
-       c = float(input('Inserisci il circolo di confusione, n per terminare. Premi d per vedere la definizione e terminare\n'))
-       
-       
-       if -a<c<a:
-         print ('La distanza iperfocale è: ' , distanza_iperfocale(f,N,c))
-         exit
-       
-       elif c=='d':
-         print ('Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi. Fonte: https://abcamera.it/circolo-di-confusione/\n')
-         exit
-       
-       elif c == 'n':
-         exit
-       
-       else:
-         uscita()
-     
-     else:
-       uscita()
-  
-   else:
-    uscita()
-  
-  
-  
-  elif start1== '2':
-    
-    
-    
-    H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione e terminare\n'));
-    
-    
-    if H == 'n':
-      exit
-    
-    
-    elif H == 'd':
-      print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito. Fonte:https://it.wikipedia.org/wiki/Distanza_iperfocale \n')
-      exit
-    
-    elif -a<H<a:
-       
-       
-       N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione e terminare\n'))
-       
-       
-       if N== 'n':
-         exit
-       
-       elif N=='d':
-         print ('L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore. Fonte:https://www.totaldesign.it/diaframma-fotografia/\n')
-         exit
-
-       elif -a<N<a:
-          
-          
-          c = float(input('Inserisci il circolo di confusione, n per terminare. Premi d per vedere la definizione e terminare\n'))
-          
-          
-          if c=='n':
-             exit
-          
-          
-          elif c=='d':
-             print ('Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi. Fonte: https://abcamera.it/circolo-di-confusione/\n')
-             exit
-          
-          
-          elif -a<c<a:
-            print ('La lunghezza focale è: ' , lunghezza_focale(H,N,c))
-            exit  
-          
-          
-          else:
-           uscita()
-       
-       else:
-         uscita()
-    else:
-     uscita()
-  
-  
-  
-  elif start1 == '3':
-    
-    
-    
-    f = float(input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione e terminare\n'))
-    
-    
-    if f=='d':
-       print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. Fonte:https://it.wikipedia.org/wiki/Lunghezza_focale\n');
-       exit
-   
-   
-    elif f=='n':
-       exit
-    
-    
-    elif -a<f<a:
-      H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione e terminare\n'));
-      
-      
-      if H == 'n':
-       exit
-     
-     
-      elif H == 'd':
-       print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito. Fonte:https://it.wikipedia.org/wiki/Distanza_iperfocale \n')
-       exit
-      
-      
-      elif -a<H<a:
-       c = float(input('Inserisci il circolo di confusione, n per terminare. Premi d per vedere la definizione e terminare\n'))
-      
-      
-       if c=='n':
-         exit
-      
-      
-       elif c=='d':
-         print ('Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi. Fonte: https://abcamera.it/circolo-di-confusione/\n')
-         exit
-       
-       elif -a<c<a:
-         print ('L\'apertura del diaframma è: ' , apertura_diaframma(H,f,c) )
-      
-       else:
-         uscita()
-         
-      else:
-       uscita()
-    else:
-      uscita()
-
-
-
-
-
-  elif start1 == '4':
-   
-    f = float(input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione e terminare\n'))
-    
-    
-    if f =='d':
-     print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. Fonte:https://it.wikipedia.org/wiki/Lunghezza_focale\n ');
-     exit
-    
-    
-    elif f=='n':
-     exit
-   
-   
-    elif -a<f<a:
-      
-      N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione e terminare\n'))
-      
-      if N== 'n':
-         exit
-      
-      elif N=='d':
-         print ('L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore. Fonte:https://www.totaldesign.it/diaframma-fotografia/\n')
-         exit
-     
-      elif -a<N<a:
-         
-         H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione e terminare\n'));
-         
-         if H == 'n':
-           exit
-         
-         elif H == 'd':
-           print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito. Fonte:https://it.wikipedia.org/wiki/Distanza_iperfocale \n')
-           exit
-         
-         elif -a<H<a:
-           print ('Il circolo di confusione è: ' ,  circolo_confusione(H,f,N))
-           
-         else:
-           uscita()
-     
-      else:
-         uscita()
-
-    else:
-     uscita()
-  
-
-  else:
-    uscita()
-
-elif start=='n':
-  print ('Relazione')
-  exit
-elif start == 't':
-  print (algoritmo_scheletro)
-  exit
-elif start == 'i':
-  print (interfaccia_)
-else:
-  print ('Errore nell\'input')
-  exit
-
+Il lavoro di gruppo è stato fondamentale per la realizzazione del nostro programma, difatti siamo riusciti ad unire le competenze di ognuno utilizzandole durante la progettazione dell’algoritmo. Ogni componente del gruppo ha collaborato tramite la piattaforma GitHub.
+Alcuni link sono presenti nello scheletro dell’algoritmo.
 """
 
+#inizializzo l'algoritmo scheletro da poi mostrare in output se richiesto
+algoritmo_scheletro="""
+
+import math#ci serve per la radice quadrata. Avremo potuto usare l'elevamento a potenza alla 1/2 perchè è la stessa cosa della radice quadrata
+
+
+def distanza_iperfocale(f,N,c):
+  H=((f**2)/(N*c))
+
+  return H
+
+#da questa formula iniziale possiamo calcolarci i vari membri usando la formula inversa
+def lunghezza_focale(H,N,c):
+  if N>0 and H>0 and c>0:
+    f=math.sqrt(N*H*c)
+    return f
+  elif N==0 or H==0 or c==0:
+    f=0
+    return f
+  else:
+    print ('Errore nell\'input')
+  return
+
+
+def apertura_diaframma(H,f,c):
+  N= (f*f)/(H*c)
+
+  return N
+
+
+def circolo_confusione (H,f,N):
+  c = (f*f)/(H*N);
+
+  return c
+
+
+def uscita():#cosa succede se l'input è sbagliato
+  print ('Errore nell\'input')
+  exit
+
+a=999999999#inizializzo a con cui andremo a confrontare dei valori in input
+#inizializzo l'algoritmo scheletro da poi mostrare in output se richiesto
+
+relazione="*Qui dentro ci sarà la relazione*"
+
+
+algoritmo_scheletro="*Qui dentro ci sarà il codice dello scheletro*"
+
+
+#inizializzo l'interfaccia in modo da metterla poi in output
 interfaccia_="*Qui dentro ci sarà il codice dell'interfaccia*"
 
-start=str(input(' Premi y se vuoi entrare nel programma;\n Premi n se vuoi leggere la relazione;\n Premi t se vuoi vedere l\' algoritmo senza interfaccia;\n Premi i se vuoi vedere il codice dell\'interfaccia\n'));
-if start== 'y':
-  start1= input('Quale valore vuoi calcolare tra i seguenti: \nPremi 1 per la distanza iperfocale (distanza minima di messa a fuoco) \nPremi 2 per la lunghezza focale \nPremi 3 per l\'apertura del diaframma \nPremi 4 per la misura del circolo di confusione\n ')
-  
-  if start1== '1':
+start=str(input(' Premi p se vuoi entrare nel programma;\n Premi r se vuoi leggere la relazione;\n Premi t se vuoi vedere l\' algoritmo senza interfaccia;\n Premi i se vuoi vedere il codice dell\'interfaccia\n')); #p perchè 'p'rogramma; il nome delle altre variabili segue lo stesso ragionamento
+if start== 'p':
+  start1= input('Quale valore vuoi calcolare tra i seguenti: \nPremi 1 per la distanza iperfocale (distanza minima di messa a fuoco) \nPremi 2 per la lunghezza focale \nPremi 3 per l\'apertura del diaframma \nPremi 4 per la misura del circolo di confusione\nAltrimenti d per leggere le definizioni delle nomenclature precedenti\n') # Facendo ciò facciamo scegliere all'utente che cosa vuole calcolare
+  #chiamiamo le varie 'finestre' di input start e start1 perchè alla fine è da lì che inizia il programma
+  if start1== '1':  # L'utente sceglie di calcolare la distanza iperfocale.
    
    
-   f = (input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione e terminare\n'))
+   f = (input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione e terminare\n')) # L'utente inserisce la lunghezza focale. Mettiamo d per definizione, n per terminare perchè t è già stato usato e n sta per 'no' (nel senso: vuoi continurare il programma? no)
    
    
-   if f=='d':
-     print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. Fonte:https://it.wikipedia.org/wiki/Lunghezza_focale\n');
+   if f=='d': #Si controlla se f==d per poi mettere in output la definizione d
+     print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. Fonte:https://it.wikipedia.org/wiki/Lunghezza_focale\n'); # L'utente sceglie di vedere la definizione di lunghezza focale.
      exit
    
    
-   elif f=='n':
+   elif f=='n':#Si controlla se f==n per poi terminare. 
      exit
 
 
-   elif (-a<f<a):
-     
+   elif (-a<f<a): # Avendo messo a come un numero molto alto, riusciamo a capire se f è un numero o meno
+     #così replichiamo il processo per poi tutte le altre variabili. Con Processo si intende l'insieme delle variabili che si vanno a chiedere in input, i controlli delle variabile e l'output finale. Il processo sarà fatto (in totale) per il numero delle funzioni totali esclusa la funzione uscita().
      
      N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione e terminare\n'))
      
      if N=='d':
-       print ('L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore. Fonte:https://www.totaldesign.it/diaframma-fotografia/\n')
+       print ('L\’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore. Fonte:https://www.totaldesign.it/diaframma-fotografia/\n')
        exit
 
      elif N == 'n':
@@ -360,7 +158,7 @@ if start== 'y':
        
        
        if -a<c<a:
-         print ('La distanza iperfocale è: ' , distanza_iperfocale(f,N,c))
+         print ('La distanza iperfocale è: ' , distanza_iperfocale(f,N,c)) #richiamo la funzione per dare l'output desiderato. Si fa in maniera analoga per tutti i casi start1 appartenti a {1,2,3,4}
          exit
        
        elif c=='d':
@@ -381,7 +179,7 @@ if start== 'y':
   
   
   
-  elif start1== '2':
+  elif start1== '2': #faccio un processo analogo con start1==2 
     
     
     
@@ -439,7 +237,7 @@ if start== 'y':
   
   
   
-  elif start1 == '3':
+  elif start1 == '3':#faccio un processo analogo con start1==3
     
     
     
@@ -492,10 +290,12 @@ if start== 'y':
       uscita()
 
 
+  elif start1 == 'd':
+    print ('1.La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito. Fonte:https://it.wikipedia.org/wiki/Distanza_iperfocale \n2.La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. Fonte:https://it.wikipedia.org/wiki/Lunghezza_focale\n3.L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore. Fonte:https://www.totaldesign.it/diaframma-fotografia/\n4.Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi. Fonte: https://abcamera.it/circolo-di-confusione/\n')
 
-
-
-  elif start1 == '4':
+  
+  
+  elif start1 == '4': #faccio un processo analogo con start1==4
    
     f = float(input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione e terminare\n'))
     
@@ -528,7 +328,7 @@ if start== 'y':
            exit
          
          elif H == 'd':
-           print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito. Fonte:https://it.wikipedia.org/wiki/Distanza_iperfocale \n')
+           print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito. Fonte:https://it.wikipedia.org/wiki/Distanza_iperfocale\n')
            exit
          
          elif -a<H<a:
@@ -543,20 +343,590 @@ if start== 'y':
     else:
      uscita()
   
-
   else:
-    uscita()
+    uscita()#questo succede quando start1 non appartiene a {1,2,3,4,d}
 
-elif start=='n':
-  print ('Relazione')
+
+elif start=='r':
+  print (relazione)
   exit
-elif start == 't':
+
+
+elif start == 't': #Dò in output lo scheletro dell'algoritmo. Per fare ciò bisogna usare """ """ per contare come stringa tutto il testo; altrimenti conterebbe come stringa e darebbe in output solo una sola riga (la prima)
   print (algoritmo_scheletro)
   exit
+
+
 elif start == 'i':
   print (interfaccia_)
+
+
 else:
   print ('Errore nell\'input')
   exit
 
 
+
+"""
+#inizializzo l'interfaccia in modo da metterla poi in output
+interfaccia_="""
+import os
+from sys import path as syspath
+syspath.append(os.path.join(os.path.dirname(__file__), 'pygame'))
+import pygame
+import time
+import math
+
+
+pygame.init()
+black = (0, 0, 0)
+white = (255, 255, 255)
+color = (255, 0, 0)
+ampdiaframma = 1
+lunghfocale = 1
+dimsensore = 1
+distmin = 0
+x = 1366
+y = 768
+screen = pygame.display.set_mode((x, y))
+pygame.display.set_caption("Show Text")
+font = pygame.font.Font("freesansbold.ttf", 20)
+changefont = pygame.font.Font("freesansbold.ttf", 16)
+text = font.render("Start", True, white)
+ampdiaframmatext = changefont.render("Ampiezza Diaframma: f/" + str(ampdiaframma),True, white)
+lunghfocaletext = changefont.render("Lunghezza Focale: " + str(lunghfocale) + "mm",True, white)
+dimsensoretext = changefont.render("Misura del Circolo di Confusione: " + str(dimsensore) + "mm",True, white)
+distmintext = font.render("La distanza minima di messa a fuoco è: " + str(distmin) + "mm/" + str(distmin/10)+ "m",True, white)
+distmintextRect = distmintext.get_rect()
+distmintextRect.center = (x*0.487, y*0.729)
+dimsensoretextRect = dimsensoretext.get_rect()
+dimsensoretextRect.center = (x*0.487, y*0.521)
+lunghfocaletextRect = lunghfocaletext.get_rect()
+lunghfocaletextRect.center = (x*0.487, y*0.3125)
+ampdiaframmatextRect = ampdiaframmatext.get_rect()
+ampdiaframmatextRect.center = (x*0.487, y*0.104)
+textRect = text.get_rect()
+textRect.center = (x*0.487, y*0.5)
+mouse_pos = pygame.mouse.get_pos()
+inpututente = ""
+backspacepressed = False
+returnpressed = False
+startpressed = False
+changeampdiaframma = False
+newampdiaframma = ""
+newlunghfocale = ""
+newdimsensore = ""
+changelunghfocale = False
+changedimsensore = False
+visualizedef1 = False
+visualizedef2 = False
+visualizedef3 = False
+
+def calcolo():                                                                          
+    global ampdiaframma
+    global dimsensore
+    global lunghfocale
+    global distmin
+    distmin = round(((lunghfocale**2)/(ampdiaframma*dimsensore)), 3)
+def controlloclick():
+    global text
+    global mouse_pos
+    global startpressed
+    global ampdiaframma
+    global dimsensore
+    global changeampdiaframma
+    global changelunghfocale
+    global changedimsensore
+    global visualizedef1
+    global visualizedef2
+    global visualizedef3
+    global def1text
+    global def1Rect
+    global def2Rect
+    global def3Rect
+    global ampdiaframmaRect
+    global ampdiaframmaansRect
+    global lunghfocaleRect
+    global dimsensoreRect
+    get_text()
+    if pygame.mouse.get_pressed()[0] and textRect.collidepoint(mouse_pos):
+        startpressed = True
+        screen.fill(black)
+    elif pygame.mouse.get_pressed()[0] and startpressed == False:
+        time.sleep(0.000001)
+    elif pygame.mouse.get_pressed()[0] and ampdiaframmaRect.collidepoint(mouse_pos):
+        changeampdiaframma = True
+    elif pygame.mouse.get_pressed()[0] and lunghfocaleRect.collidepoint(mouse_pos):
+        changelunghfocale = True
+    elif pygame.mouse.get_pressed()[0] and dimsensoreRect.collidepoint(mouse_pos):
+        changedimsensore = True
+    elif pygame.mouse.get_pressed()[0] and def1Rect.collidepoint(mouse_pos):
+        visualizedef1 = True
+    elif pygame.mouse.get_pressed()[0] and def2Rect.collidepoint(mouse_pos):
+        visualizedef2 = True
+    elif pygame.mouse.get_pressed()[0] and def3Rect.collidepoint(mouse_pos):
+        visualizedef3 = True
+
+
+def update():
+
+    pygame.display.flip()
+    controlloclick()
+    calcolo()
+    get_text()
+
+
+def get_text():
+    global x
+    global y
+    global ampdiaframma
+    global lunghfocale
+    global dimsensore
+    global startpressed
+    global color
+    global changeampdiaframma
+    global changelunghfocale
+    global changedimsensore
+    global visualizedef1
+    global visualizedef2
+    global visualizedef3
+    global def1text
+    global def1Rect
+    global def2Rect
+    global def3Rect
+    global ampdiaframmaRect
+    global ampdiaframmaansRect
+    global newampdiaframma
+    global lunghfocaleRect
+    global lunghfocaleansRect
+    global newlunghfocale
+    global dimsensoreRect
+    global dimsensoreansRect
+    global newdimsensore
+    global inpututente
+    global backspacepressed
+    global returnpressed
+    ampdiaframmatext = changefont.render("Ampiezza Diaframma: f/" + str(ampdiaframma) , True, white)
+    lunghfocaletext = changefont.render("Lunghezza Focale: " + str(lunghfocale) + "mm",True, white)
+    dimsensoretext = changefont.render("Misura del Circolo di Confusione: " + str(dimsensore) + "mm",True, white)
+    distmintext = font.render("La distanza minima di messa a fuoco è: " + str(round((distmin/1000),3)) + "m" ,True, white)
+    if startpressed == False and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False and visualizedef1 == False and visualizedef2 == False and visualizedef3 == False:
+        screen.blit(text, textRect)
+    elif startpressed == True and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False and visualizedef1 == False and visualizedef2 == False and visualizedef3 == False:
+        screen.blit(ampdiaframmatext, ampdiaframmatextRect)
+        ampdiaframmaRect = pygame.draw.rect(screen, black, pygame.Rect(x*0.857, y*0.059, 120, 60))
+        changetext = changefont.render("Cambia", True, white)
+        changetextRect = changetext.get_rect()
+        changetextRect.center = (x*0.9, y*0.104)
+        def1Rect = pygame.draw.rect(screen, black, pygame.Rect(x*0.105, y*0.06,100, 60))
+        deftext = changefont.render("Definizione", True, white)
+        deftextRect = deftext.get_rect()
+        deftextRect.center = (x*0.143,y*0.104)
+        screen.blit(deftext, deftextRect)
+        screen.blit(changetext, changetextRect)
+        screen.blit(lunghfocaletext, lunghfocaletextRect)
+        lunghfocaleRect = pygame.draw.rect(screen, black, pygame.Rect(x*0.857, y*0.275, 120, 60))
+        changetext2 = changefont.render("Cambia", True, white)
+        changetext2Rect = changetext2.get_rect()
+        changetext2Rect.center = (x*0.9, y*0.3125)
+        def2Rect = pygame.draw.rect(screen, black, pygame.Rect(x*0.105, y*0.275, 100, 60))
+        deftext2 = changefont.render("Definizione", True, white)
+        deftextRect2 = deftext2.get_rect()
+        deftextRect2.center = (x*0.143,y*0.3125)
+        screen.blit(deftext2, deftextRect2)
+        screen.blit(changetext2, changetext2Rect)
+        screen.blit(dimsensoretext, dimsensoretextRect)
+        dimsensoreRect = pygame.draw.rect(screen, black, pygame.Rect(x*0.857, y*0.48, 120, 60))
+        changetext3 = changefont.render("Cambia", True, white)
+        changetext3Rect = changetext3.get_rect()
+        changetext3Rect.center = (x*0.9, y*0.52)
+        def3Rect = pygame.draw.rect(screen, black, pygame.Rect(x*0.105, y*0.478, 100, 60))
+        deftext3 = changefont.render("Definizione", True, white)
+        deftextRect3 = deftext3.get_rect()
+        deftextRect3.center = (x*0.143,y*0.521)
+        screen.blit(deftext3, deftextRect3)
+        screen.blit(changetext3, changetext3Rect)
+        screen.blit(distmintext, distmintextRect)
+    elif changeampdiaframma == True:
+        screen.fill(black)
+        if backspacepressed == True:
+            newampdiaframma = newampdiaframma[:-1]
+            backspacepressed = False
+        newampdiaframma = newampdiaframma + inpututente
+        inpututente = ""
+        ampdiaframmaans = changefont.render("Inserire nuova Ampiezza del Diaframma: f/" + str(newampdiaframma),True, white)
+        ampdiaframmaansRect = ampdiaframmaans.get_rect()
+        ampdiaframmaansRect.center = (x*0.5, y*0.5)
+        screen.blit(ampdiaframmaans, ampdiaframmaansRect)
+        if returnpressed == True:
+            if newampdiaframma == "":
+                ampdiaframma = 1
+            else:
+                ampdiaframma = float(newampdiaframma)
+            changeampdiaframma = False
+            returnpressed = False
+            screen.fill(black)
+    elif changelunghfocale == True:
+        screen.fill(black)
+        if backspacepressed == True:
+            newlunghfocale = newlunghfocale[:-1]
+            backspacepressed = False
+        newlunghfocale = newlunghfocale + inpututente
+        inpututente = ""
+        lunghfocaleans = changefont.render("Inserire nuova Lunghezza Focale: " + str(newlunghfocale) + "mm",True, white)
+        lunghfocaleansRect = lunghfocaleans.get_rect()
+        lunghfocaleansRect.center = (x*0.5, y*0.5)
+        screen.blit(lunghfocaleans, lunghfocaleansRect)
+        if returnpressed == True:
+            if newlunghfocale == "":
+                lunghfocale = 0
+            else:
+                lunghfocale = float(newlunghfocale)
+            changelunghfocale = False
+            returnpressed = False
+            screen.fill(black)
+    elif changedimsensore == True:
+        screen.fill(black)
+        if backspacepressed == True:
+            newdimsensore = newdimsensore[:-1]
+            backspacepressed = False
+        newdimsensore = newdimsensore + inpututente
+        inpututente = ""
+        dimsensoreans = changefont.render("Inserire nuovo Circolo di Confusione: " + str(newdimsensore) + "mm",True, white)
+        dimsensoreansRect = dimsensoreans.get_rect()
+        dimsensoreansRect.center = (x*0.5, y*0.5)
+        screen.blit(dimsensoreans, dimsensoreansRect)
+        if returnpressed == True:
+            if newdimsensore == "":
+                dimsensore = 1
+            else:
+                dimsensore = float(newdimsensore)
+            changedimsensore = False
+            returnpressed = False
+            screen.fill(black)
+    elif visualizedef1 == True:
+        screen.fill(black)
+        def1textpart1 = changefont.render("La lunghezza focale f è la distanza tra il piano centrale della lente sottile(o dello specchio) e il punto",True,white)
+        def1textpart1Rect = def1textpart1.get_rect()
+        def1textpart1Rect.center = (x*0.5, y*0.45)
+        def1textpart2 = changefont.render("immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da un punto luce posto all\'infinito.",True, white)
+        def1textpart2Rect = def1textpart2.get_rect()
+        def1textpart2Rect.center = (x*0.5, y*0.5)
+        screen.blit(def1textpart1, def1textpart1Rect)
+        screen.blit(def1textpart2, def1textpart2Rect)
+        if returnpressed == True:
+            visualizedef1 = False
+            returnpressed = False
+            screen.fill(black)
+    elif visualizedef2 == True:
+        screen.fill(black)
+        def2textpart1 = changefont.render("L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo",True,white)
+        def2textpart1Rect = def2textpart1.get_rect()
+        def2textpart1Rect.center = (x*0.5, y*0.45)
+        def2textpart2 = changefont.render("attraverso cui la luce potrà passare ed imprimere il sensore.",True, white)
+        def2textpart2Rect = def2textpart2.get_rect()
+        def2textpart2Rect.center = (x*0.5, y*0.5)
+        screen.blit(def2textpart1, def2textpart1Rect)
+        screen.blit(def2textpart2, def2textpart2Rect)
+        if returnpressed == True:
+            visualizedef2 = False
+            returnpressed = False
+            screen.fill(black)
+    elif visualizedef3 == True:
+        screen.fill(black)
+        def3textpart1 = changefont.render("Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale",True,white)
+        def3textpart1Rect = def3textpart1.get_rect()
+        def3textpart1Rect.center = (x*0.5, y*0.45)
+        def3textpart2 = changefont.render("la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi",True, white)
+        def3textpart2Rect = def3textpart2.get_rect()
+        def3textpart2Rect.center = (x*0.5, y*0.5)
+        screen.blit(def3textpart1, def3textpart1Rect)
+        screen.blit(def3textpart2, def3textpart2Rect)
+        if returnpressed == True:
+            visualizedef3 = False
+            returnpressed = False
+            screen.fill(black)
+
+
+while True:
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_0:
+                inpututente = "0"
+            elif event.key == pygame.K_1:
+                inpututente = "1"
+            elif event.key == pygame.K_2:
+                inpututente = "2"
+            elif event.key == pygame.K_3:
+                inpututente = "3"
+            elif event.key == pygame.K_4:
+                inpututente = "4"
+            elif event.key == pygame.K_5:
+                inpututente = "5"
+            elif event.key == pygame.K_6:
+                inpututente = "6"
+            elif event.key == pygame.K_7:
+                inpututente = "7"
+            elif event.key == pygame.K_8:
+                inpututente = "8"
+            elif event.key == pygame.K_9:
+                inpututente = "9"
+            elif event.key == pygame.K_PERIOD:
+                inpututente = "."
+            elif event.key == pygame.K_BACKSPACE:
+                backspacepressed = True
+            elif event.key == pygame.K_RETURN:
+                returnpressed = True
+        mouse_pos = pygame.mouse.get_pos()
+        update()
+"""
+
+#useremo tanti spazi per rendere l'algoritmo meno difficile da leggere e meno pensate alla vista.
+
+start=str(input(' Premi p se vuoi entrare nel programma;\n Premi r se vuoi leggere la relazione;\n Premi t se vuoi vedere l\' algoritmo senza interfaccia;\n Premi i se vuoi vedere il codice dell\'interfaccia\n')); #p perchè 'p'rogramma; il nome delle altre variabili segue lo stesso ragionamento
+if start== 'p':
+  start1= input('Quale valore vuoi calcolare tra i seguenti: \nPremi 1 per la distanza iperfocale (distanza minima di messa a fuoco) \nPremi 2 per la lunghezza focale \nPremi 3 per l\'apertura del diaframma \nPremi 4 per la misura del circolo di confusione\nAltrimenti d per leggere le definizioni delle nomenclature precedenti\n') # Facendo ciò facciamo scegliere all'utente che cosa vuole calcolare
+  #chiamiamo le varie 'finestre' di input start e start1 perchè alla fine è da lì che inizia il programma
+  if start1== '1':  # L'utente sceglie di calcolare la distanza iperfocale.
+   
+   
+   f = (input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione e terminare\n')) # L'utente inserisce la lunghezza focale. Mettiamo d per definizione, n per terminare perchè t è già stato usato e n sta per 'no' (nel senso: vuoi continurare il programma? no)
+   
+   
+   if f=='d': #Si controlla se f==d per poi mettere in output la definizione d
+     print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. Fonte:https://it.wikipedia.org/wiki/Lunghezza_focale\n'); # L'utente sceglie di vedere la definizione di lunghezza focale.
+     exit
+   
+   
+   elif f=='n':#Si controlla se f==n per poi terminare. 
+     exit
+
+
+   elif (-a<f<a): # Avendo messo a come un numero molto alto, riusciamo a capire se f è un numero o meno
+     #così replichiamo il processo per poi tutte le altre variabili. Con Processo si intende l'insieme delle variabili che si vanno a chiedere in input, i controlli delle variabile e l'output finale. Il processo sarà fatto (in totale) per il numero delle funzioni totali esclusa la funzione uscita().
+     
+     N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione e terminare\n'))
+     
+     if N=='d':
+       print ('L\’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore. Fonte:https://www.totaldesign.it/diaframma-fotografia/\n')
+       exit
+
+     elif N == 'n':
+       exit
+     
+     elif -a<N<a:
+       
+       
+       c = float(input('Inserisci il circolo di confusione, n per terminare. Premi d per vedere la definizione e terminare\n'))
+       
+       
+       if -a<c<a:
+         print ('La distanza iperfocale è: ' , distanza_iperfocale(f,N,c)) #richiamo la funzione per dare l'output desiderato. Si fa in maniera analoga per tutti i casi start1 appartenti a {1,2,3,4}
+         exit
+       
+       elif c=='d':
+         print ('Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi. Fonte: https://abcamera.it/circolo-di-confusione/\n')
+         exit
+       
+       elif c == 'n':
+         exit
+       
+       else:
+         uscita()
+     
+     else:
+       uscita()
+  
+   else:
+    uscita()
+  
+  
+  
+  elif start1== '2': #faccio un processo analogo con start1==2 
+    
+    
+    
+    H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione e terminare\n'));
+    
+    
+    if H == 'n':
+      exit
+    
+    
+    elif H == 'd':
+      print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito. Fonte:https://it.wikipedia.org/wiki/Distanza_iperfocale \n')
+      exit
+    
+    elif -a<H<a:
+       
+       
+       N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione e terminare\n'))
+       
+       
+       if N== 'n':
+         exit
+       
+       elif N=='d':
+         print ('L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore. Fonte:https://www.totaldesign.it/diaframma-fotografia/\n')
+         exit
+
+       elif -a<N<a:
+          
+          
+          c = float(input('Inserisci il circolo di confusione, n per terminare. Premi d per vedere la definizione e terminare\n'))
+          
+          
+          if c=='n':
+             exit
+          
+          
+          elif c=='d':
+             print ('Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi. Fonte: https://abcamera.it/circolo-di-confusione/\n')
+             exit
+          
+          
+          elif -a<c<a:
+            print ('La lunghezza focale è: ' , lunghezza_focale(H,N,c))
+            exit  
+          
+          
+          else:
+           uscita()
+       
+       else:
+         uscita()
+    else:
+     uscita()
+  
+  
+  
+  elif start1 == '3':#faccio un processo analogo con start1==3
+    
+    
+    
+    f = float(input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione e terminare\n'))
+    
+    
+    if f=='d':
+       print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. Fonte:https://it.wikipedia.org/wiki/Lunghezza_focale\n');
+       exit
+   
+   
+    elif f=='n':
+       exit
+    
+    
+    elif -a<f<a:
+      H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione e terminare\n'));
+      
+      
+      if H == 'n':
+       exit
+     
+     
+      elif H == 'd':
+       print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito. Fonte:https://it.wikipedia.org/wiki/Distanza_iperfocale \n')
+       exit
+      
+      
+      elif -a<H<a:
+       c = float(input('Inserisci il circolo di confusione, n per terminare. Premi d per vedere la definizione e terminare\n'))
+      
+      
+       if c=='n':
+         exit
+      
+      
+       elif c=='d':
+         print ('Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi. Fonte: https://abcamera.it/circolo-di-confusione/\n')
+         exit
+       
+       elif -a<c<a:
+         print ('L\'apertura del diaframma è: ' , apertura_diaframma(H,f,c) )
+      
+       else:
+         uscita()
+         
+      else:
+       uscita()
+    else:
+      uscita()
+
+
+  elif start1 == 'd':
+    print ('1.La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito. Fonte:https://it.wikipedia.org/wiki/Distanza_iperfocale \n2.La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. Fonte:https://it.wikipedia.org/wiki/Lunghezza_focale\n3.L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore. Fonte:https://www.totaldesign.it/diaframma-fotografia/\n4.Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi. Fonte: https://abcamera.it/circolo-di-confusione/\n')
+
+  
+  
+  elif start1 == '4': #faccio un processo analogo con start1==4
+   
+    f = float(input('Inserisci la lunghezza focale, n per terminare. Premi d per vedere la definizione e terminare\n'))
+    
+    
+    if f =='d':
+     print ('La lunghezza focale f è la distanza tra il piano centrale della lente sottile (o dello specchio) e il punto immagine assiale sul piano di focalizzazione, dei raggi paralleli emessi da "un punto luce" posto all\'infinito. Fonte:https://it.wikipedia.org/wiki/Lunghezza_focale\n ');
+     exit
+    
+    
+    elif f=='n':
+     exit
+   
+   
+    elif -a<f<a:
+      
+      N=float(input('Inserisci l\'apertura del diaframma. n per terminare. Premi d per vedere la definizione e terminare\n'))
+      
+      if N== 'n':
+         exit
+      
+      elif N=='d':
+         print ('L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo attraverso cui la luce potrà passare ed imprimere il sensore. Fonte:https://www.totaldesign.it/diaframma-fotografia/\n')
+         exit
+     
+      elif -a<N<a:
+         
+         H= float(input('Inserisci la distanza iperfocale, n per terminare. Premi d per vedere la definizione e terminare\n'));
+         
+         if H == 'n':
+           exit
+         
+         elif H == 'd':
+           print ('La distanza iperfocale è una particolare lunghezza di messa a fuoco, che permette di ottenere la distanza più ravvicinata alla quale un obiettivo può mettere a fuoco mantenendo accettabilmente nitidi gli oggetti all\'infinito. Fonte:https://it.wikipedia.org/wiki/Distanza_iperfocale\n')
+           exit
+         
+         elif -a<H<a:
+           print ('Il circolo di confusione è: ' ,  circolo_confusione(H,f,N))
+           
+         else:
+           uscita()
+     
+      else:
+         uscita()
+
+    else:
+     uscita()
+  
+  else:
+    uscita()#questo succede quando start1 non appartiene a {1,2,3,4,d}
+
+
+elif start=='r':
+  print (relazione)
+  exit
+
+
+elif start == 't': #Dò in output lo scheletro dell'algoritmo. Per fare ciò bisogna usare """ """ per contare come stringa tutto il testo; altrimenti conterebbe come stringa e darebbe in output solo una sola riga (la prima)
+  print (algoritmo_scheletro)
+  exit
+
+
+elif start == 'i':
+  print (interfaccia_)
+
+
+else:
+  print ('Errore nell\'input')
+  exit
