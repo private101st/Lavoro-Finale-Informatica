@@ -66,6 +66,8 @@ def controlloclick():
     global changelunghfocale
     global changedimsensore
     global visualizedef1
+    global visualizedef2
+    global visualizedef3
     global def1text
     global def1Rect
     global def2Rect
@@ -114,6 +116,8 @@ def get_text():
     global changelunghfocale
     global changedimsensore
     global visualizedef1
+    global visualizedef2
+    global visualizedef3
     global def1text
     global def1Rect
     global def2Rect
@@ -134,9 +138,9 @@ def get_text():
     lunghfocaletext = changefont.render("Lunghezza Focale: " + str(lunghfocale) + "mm",True, white)
     dimsensoretext = changefont.render("Misura del Circolo di Confusione: " + str(dimsensore) + "mm",True, white)
     distmintext = font.render("La distanza minima di messa a fuoco è: " + str(round((distmin/1000),3)) + "m" ,True, white)
-    if startpressed == False and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False and visualizedef1 == False:
+    if startpressed == False and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False and visualizedef1 == False and visualizedef2 == False and visualizedef3 == False:
         screen.blit(text, textRect)
-    elif startpressed == True and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False and visualizedef1 == False:
+    elif startpressed == True and changelunghfocale == False and changeampdiaframma == False and changedimsensore == False and visualizedef1 == False and visualizedef2 == False and visualizedef3 == False:
         screen.blit(ampdiaframmatext, ampdiaframmatextRect)
         ampdiaframmaRect = pygame.draw.rect(screen, black, pygame.Rect(x*0.857, y*0.059, 120, 60))
         changetext = changefont.render("Cambia", True, white)
@@ -238,6 +242,38 @@ def get_text():
         def1textpart2Rect.center = (x*0.5, y*0.5)
         screen.blit(def1textpart1, def1textpart1Rect)
         screen.blit(def1textpart2, def1textpart2Rect)
+        if returnpressed == True:
+            visualizedef1 = False
+            returnpressed = False
+            screen.fill(black)
+    elif visualizedef2 == True:
+        screen.fill(black)
+        def2textpart1 = changefont.render("L’apertura del diaframma è un valore che indica l’ampiezza della sezione dell’obiettivo",True,white)
+        def2textpart1Rect = def2textpart1.get_rect()
+        def2textpart1Rect.center = (x*0.5, y*0.45)
+        def2textpart2 = changefont.render("attraverso cui la luce potrà passare ed imprimere il sensore.",True, white)
+        def2textpart2Rect = def2textpart2.get_rect()
+        def2textpart2Rect.center = (x*0.5, y*0.5)
+        screen.blit(def2textpart1, def2textpart1Rect)
+        screen.blit(def2textpart2, def2textpart2Rect)
+        if returnpressed == True:
+            visualizedef2 = False
+            returnpressed = False
+            screen.fill(black)
+    elif visualizedef3 == True:
+        screen.fill(black)
+        def3textpart1 = changefont.render("Il circolo di confusione è quel parametro che ci indica quale sia la soglia oltre la quale",True,white)
+        def3textpart1Rect = def3textpart1.get_rect()
+        def3textpart1Rect.center = (x*0.5, y*0.45)
+        def3textpart2 = changefont.render("la sfocatura, in una fotografia, inizi ad essere percepibile ai nostri occhi",True, white)
+        def3textpart2Rect = def3textpart2.get_rect()
+        def3textpart2Rect.center = (x*0.5, y*0.5)
+        screen.blit(def3textpart1, def3textpart1Rect)
+        screen.blit(def3textpart2, def3textpart2Rect)
+        if returnpressed == True:
+            visualizedef3 = False
+            returnpressed = False
+            screen.fill(black)
 
 
 while True:
