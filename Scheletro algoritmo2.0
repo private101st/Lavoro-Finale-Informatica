@@ -48,7 +48,11 @@ RELAZIONE PROGETTO FINALE
 
 LAVORO SVOLTO DA: MATTEO ALBERTINI OFFEDDU, MICHELE CRISTOFALETTI, VITTORIO MENON, GABRIELE ZAMPINI 
 Inizialmente abbiamo creato un algoritmo “traccia” dove abbiamo ragionato sul procedimento e la progettazione del programma. 
-La bozza iniziale ci ha permesso di provare vari procedimenti del programma e perfezionarli per poi arrivare a trovare un algoritmo corretto dal punto di vista semantico, con un utilizzo dei nomi delle variabili appropriato, con uso di commenti, con la gestione dell'input errato e un algoritmo User-friendly.  In questa bozza (o scheletro dell’algoritmo) siamo riusciti a creare un programma completo senza interfaccia in modo che un utente, se non interessato alla grafica, potesse usare questo algoritmo più completo. Inoltre abbiamo messo pure l’opzione di visualizzare il codice dello scheletro, quello dell’interfaccia e questa stessa relazione. Nello scheletro sono presenti dei commenti.
+La bozza iniziale ci ha permesso di provare vari procedimenti del programma e perfezionarli per poi arrivare a trovare un algoritmo corretto dal punto di vista semantico, con un utilizzo dei nomi delle variabili appropriato, con uso di commenti, con la gestione dell'input errato e un algoritmo User-friendly.  
+In questa bozza (o scheletro dell’algoritmo) siamo riusciti a creare un programma completo senza interfaccia in modo che un utente, se non interessato alla grafica, 
+potesse usare questo algoritmo più completo. 
+Inoltre abbiamo messo pure l’opzione di visualizzare il codice dello scheletro, quello dell’interfaccia e questa stessa relazione. 
+Nello scheletro sono presenti dei commenti.
 All’interno della bozza sono state utilizzate e provate per la prima volta le formule che ci hanno permesso di risolvere l’algoritmo.
 Le formule più importanti sono state trovate su:
  
@@ -56,7 +60,9 @@ https://www.riccardoperini.it/iperfocale-in-fotografia/
 http://www.fotografia-digitale-nonsolo.it/contenuti/iperfocale.htm#:~:text=la%20distanza%20di%20messa%20fuoco,%3A%20D%20%3D%20punto%20pi%C3%B9%20lontano)
 per poi essere rielaborate e adattate al nostro algoritmo. 
 
-Il programma è stato in seguito integrato con l’interfaccia, dove è stato creato un menù nel  quale si riesce facilmente ad interagire modificando i dati in input (ampiezza del diaframma,lunghezza focale e la misura del circolo di confusione), modificando questi ultimi l’algoritmo restituirà in output la distanza minima di messa a fuoco. Non tutte le funzioni presenti nello scheletro dell’algoritmo sono presenti nel codice dell’interfaccia perchè noi abbiamo ritenuto opportuno mettere solo il calcolo della distanza minima di messa a fuoco nell’interfaccia e il codice completo in un algoritmo staccato. L’aiuto necessario per la programmazione dell’interfaccia è stato trovato su:
+Il programma è stato in seguito integrato con l’interfaccia, dove è stato creato un menù nel  quale si riesce facilmente ad interagire modificando i dati in input (ampiezza del diaframma,lunghezza focale e la misura del circolo di confusione), modificando questi ultimi l’algoritmo restituirà in output la distanza minima di messa a fuoco. 
+Non tutte le funzioni presenti nello scheletro dell’algoritmo sono presenti nel codice dell’interfaccia perchè noi abbiamo ritenuto opportuno mettere solo il calcolo della distanza minima di messa a fuoco nell’interfaccia e il codice completo in un algoritmo staccato. 
+L’aiuto necessario per la programmazione dell’interfaccia è stato trovato su:
 
 https://elearn.ellak.gr/mod/page/view.php?id=2786
 https://www.geeksforgeeks.org/how-to-draw-rectangle-in-pygame/
